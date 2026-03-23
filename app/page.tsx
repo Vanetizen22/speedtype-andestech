@@ -7,6 +7,7 @@ import { Leaderboard, type Participant } from "@/components/leaderboard";
 import { Button } from "@/components/ui/button";
 import { Keyboard, Play, RotateCcw, Trophy, Plus, Share2 } from "lucide-react";
 import { toast } from "sonner";
+import { getTextByIndex } from "@/lib/texts";
 
 export default function Home() {
   const [competitionStarted, setCompetitionStarted] = useState(false);
@@ -19,16 +20,19 @@ export default function Home() {
   };
 
   const addParticipant = (name: string) => {
-    const newParticipant: Participant = {
-      id: crypto.randomUUID(),
-      name,
-      time_seconds: null,
-      errors: 0,
-      wpm: 0,
-      completed: false,
-      created_at: new Date().toISOString(),
-    };
-    setParticipants((prev) => [...prev, newParticipant]);
+    setParticipants((prev) => {
+      const newParticipant: Participant = {
+        id: crypto.randomUUID(),
+        name,
+        text: getTextByIndex(prev.length),
+        time_seconds: null,
+        errors: 0,
+        wpm: 0,
+        completed: false,
+        created_at: new Date().toISOString(),
+      };
+      return [...prev, newParticipant];
+    });
     toast.success(`${name} agregado a la competencia`);
   };
 
@@ -155,6 +159,7 @@ export default function Home() {
             <div className="w-full max-w-4xl">
               <TypingTest
                 participantName={activeParticipant.name}
+                text={activeParticipant.text}
                 onComplete={handleComplete}
                 onCancel={() => setCurrentPlayer(null)}
               />

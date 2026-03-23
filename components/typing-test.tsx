@@ -1,18 +1,18 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { getRandomText } from "@/lib/texts";
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 
 interface TypingTestProps {
   participantName: string;
+  text: string;
   onComplete: (time: number, errors: number, wpm: number) => void;
   onCancel: () => void;
 }
 
-export function TypingTest({ participantName, onComplete, onCancel }: TypingTestProps) {
-  const [targetText] = useState(() => getRandomText());
+export function TypingTest({ participantName, text, onComplete, onCancel }: TypingTestProps) {
+  const targetText = text;
   const [typed, setTyped] = useState("");
   const [started, setStarted] = useState(false);
   const [startTime, setStartTime] = useState<number | null>(null);

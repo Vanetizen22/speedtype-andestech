@@ -5,6 +5,7 @@ import { Trophy, Medal, Clock, AlertCircle, Gauge } from "lucide-react";
 export interface Participant {
   id: string;
   name: string;
+  text: string;
   time_seconds: number | null;
   errors: number;
   wpm: number;
