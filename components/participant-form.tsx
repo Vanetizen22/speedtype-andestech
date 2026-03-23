@@ -1,14 +1,16 @@
+"use client";
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { UserPlus } from "lucide-react";
 
-interface Props {
+interface ParticipantFormProps {
   onAdd: (name: string) => void;
   existingNames: string[];
 }
 
-export function ParticipantForm({ onAdd, existingNames }: Props) {
+export function ParticipantForm({ onAdd, existingNames }: ParticipantFormProps) {
   const [name, setName] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
