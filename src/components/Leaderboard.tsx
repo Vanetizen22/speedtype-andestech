@@ -1,5 +1,7 @@
-import { Participant } from "@/lib/types";
+import { Tables } from "@/integrations/supabase/types";
 import { Trophy, Medal, Clock, AlertCircle, Gauge } from "lucide-react";
+
+type Participant = Tables<"participants">;
 
 interface Props {
   participants: Participant[];
@@ -8,7 +10,7 @@ interface Props {
 export function Leaderboard({ participants }: Props) {
   const completed = participants
     .filter((p) => p.completed)
-    .sort((a, b) => (a.time ?? Infinity) - (b.time ?? Infinity));
+    .sort((a, b) => (a.time_seconds ?? Infinity) - (b.time_seconds ?? Infinity));
 
   const pending = participants.filter((p) => !p.completed);
 
@@ -49,7 +51,7 @@ export function Leaderboard({ participants }: Props) {
               <div className="flex items-center gap-4 text-sm">
                 <div className="flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5 text-muted-foreground" />
-                  <span className="font-mono font-bold">{p.time?.toFixed(1)}s</span>
+                  <span className="font-mono font-bold">{p.time_seconds?.toFixed(1)}s</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <Gauge className="w-3.5 h-3.5 text-muted-foreground" />
