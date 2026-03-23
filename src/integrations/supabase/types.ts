@@ -14,7 +14,65 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      competitions: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      participants: {
+        Row: {
+          competition_id: string
+          completed: boolean
+          created_at: string
+          errors: number
+          id: string
+          name: string
+          time_seconds: number | null
+          wpm: number
+        }
+        Insert: {
+          competition_id: string
+          completed?: boolean
+          created_at?: string
+          errors?: number
+          id?: string
+          name: string
+          time_seconds?: number | null
+          wpm?: number
+        }
+        Update: {
+          competition_id?: string
+          completed?: boolean
+          created_at?: string
+          errors?: number
+          id?: string
+          name?: string
+          time_seconds?: number | null
+          wpm?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "participants_competition_id_fkey"
+            columns: ["competition_id"]
+            isOneToOne: false
+            referencedRelation: "competitions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
