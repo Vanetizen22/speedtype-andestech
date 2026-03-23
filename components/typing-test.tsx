@@ -78,7 +78,7 @@ export function TypingTest({ participantName, onComplete, onCancel }: TypingTest
 
   if (!started) {
     return (
-      <div className="flex flex-col items-center justify-center gap-8 py-12 min-h-screen">
+      <div className="flex flex-col items-center justify-center gap-8 py-12">
         <div className="text-center space-y-2">
           <p className="text-muted-foreground text-sm uppercase tracking-widest">Turno de</p>
           <h2 className="text-3xl font-bold text-amber-500">{participantName}</h2>
@@ -100,7 +100,7 @@ export function TypingTest({ participantName, onComplete, onCancel }: TypingTest
   }
 
   return (
-    <div className="space-y-6 flex flex-col h-screen justify-center">
+    <div className="space-y-6 w-full">
       <div className="flex items-center justify-between">
         <div className="space-y-1">
           <p className="text-muted-foreground text-xs uppercase tracking-widest">Escribiendo</p>
@@ -120,10 +120,8 @@ export function TypingTest({ participantName, onComplete, onCancel }: TypingTest
         </div>
       </div>
 
-      <div className="bg-muted rounded-lg p-6 font-mono-code text-lg leading-relaxed tracking-wide select-none flex-1 flex items-center justify-center">
-        <div className="max-w-2xl">
-          {renderText()}
-        </div>
+      <div className="bg-muted rounded-lg p-6 font-mono text-lg leading-relaxed tracking-wide select-none">
+        {renderText()}
       </div>
 
       <input

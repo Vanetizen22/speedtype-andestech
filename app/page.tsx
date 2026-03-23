@@ -151,12 +151,14 @@ export default function Home() {
 
         {/* Typing test active */}
         {activeParticipant ? (
-          <div className="bg-card border border-border rounded-xl p-6">
-            <TypingTest
-              participantName={activeParticipant.name}
-              onComplete={handleComplete}
-              onCancel={() => setCurrentPlayer(null)}
-            />
+          <div className="fixed inset-0 bg-background z-50 flex items-center justify-center p-8">
+            <div className="w-full max-w-4xl">
+              <TypingTest
+                participantName={activeParticipant.name}
+                onComplete={handleComplete}
+                onCancel={() => setCurrentPlayer(null)}
+              />
+            </div>
           </div>
         ) : (
           <>
