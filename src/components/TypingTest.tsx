@@ -65,7 +65,7 @@ export function TypingTest({ participantName, onComplete, onCancel }: Props) {
     return targetText.split("").map((char, i) => {
       let className = "text-muted-foreground"; // not typed yet
       if (i < typed.length) {
-        className = typed[i] === char ? "text-primary text-glow-primary" : "text-destructive underline";
+        className = typed[i] === char ? "text-primary" : "text-destructive underline";
       }
       if (i === typed.length) {
         className += " border-l-2 border-primary animate-pulse";
@@ -83,15 +83,15 @@ export function TypingTest({ participantName, onComplete, onCancel }: Props) {
       <div className="flex flex-col items-center gap-8 py-12">
         <div className="text-center space-y-2">
           <p className="text-muted-foreground text-sm uppercase tracking-widest">Turno de</p>
-          <h2 className="text-3xl font-bold text-secondary text-glow-secondary">{participantName}</h2>
+          <h2 className="text-3xl font-bold text-amber-500">{participantName}</h2>
         </div>
         <p className="text-muted-foreground text-center max-w-md">
-          Cuando estés listo, presiona el botón. El cronómetro comenzará inmediatamente.
+          Cuando estes listo, presiona el boton. El cronometro comenzara inmediatamente.
         </p>
         <div className="flex gap-3">
-          <Button onClick={handleStart} size="lg" className="neon-glow gap-2 text-lg px-8">
+          <Button onClick={handleStart} size="lg" className="gap-2 text-lg px-8">
             <Play className="w-5 h-5" />
-            ¡Comenzar!
+            Comenzar
           </Button>
           <Button onClick={onCancel} variant="outline" size="lg">
             Cancelar
@@ -106,11 +106,11 @@ export function TypingTest({ participantName, onComplete, onCancel }: Props) {
       <div className="flex items-center justify-between">
         <div className="space-y-1">
           <p className="text-muted-foreground text-xs uppercase tracking-widest">Escribiendo</p>
-          <p className="text-secondary font-semibold text-glow-secondary">{participantName}</p>
+          <p className="text-amber-500 font-semibold">{participantName}</p>
         </div>
         <div className="flex gap-6 items-center">
           <div className="text-center">
-            <p className="text-2xl font-mono font-bold text-primary text-glow-primary">{elapsed.toFixed(1)}s</p>
+            <p className="text-2xl font-mono font-bold text-primary">{elapsed.toFixed(1)}s</p>
             <p className="text-xs text-muted-foreground">Tiempo</p>
           </div>
           <div className="text-center">
