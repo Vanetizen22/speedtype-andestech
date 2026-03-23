@@ -1,8 +1,9 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "speedtype-andestech",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "packageManager": "npm@10.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
