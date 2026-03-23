@@ -28,7 +28,7 @@ export function ParticipantForm({ onAdd, existingNames }: Props) {
         placeholder="Nombre del participante..."
         className="bg-muted border-border font-mono-code text-foreground placeholder:text-muted-foreground focus:ring-ring focus:border-primary"
       />
-      <Button type="submit" className="neon-glow gap-2 font-semibold">
+      <Button type="submit" className="gap-2 font-semibold">
         <UserPlus className="w-4 h-4" />
         Agregar
       </Button>
