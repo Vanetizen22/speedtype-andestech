@@ -12,6 +12,10 @@ export default {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      body: ['"Space Grotesk"', 'sans-serif'],
+      mono: ['"Fira Code"', 'monospace'],
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
