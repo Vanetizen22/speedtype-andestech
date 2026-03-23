@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 7%;
+    --foreground: 190 10% 90%;
+    --card: 220 18% 11%;
+    --card-foreground: 190 10% 90%;
+    --primary: 185 72% 50%;
+    --primary-foreground: 220 20% 7%;
+    --secondary: 40 90% 55%;
+    --secondary-foreground: 220 20% 7%;
+    --muted: 220 15% 16%;
+    --muted-foreground: 220 10% 55%;
+    --accent: 280 70% 60%;
+    --accent-foreground: 220 20% 7%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 15% 20%;
+    --input: 220 15% 18%;
+    --ring: 185 72% 50%;
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-mono-code {
+    font-family: 'Fira Code', monospace;
+  }
+}

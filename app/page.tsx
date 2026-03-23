@@ -1,22 +1,14 @@
+"use client";
+
 import { useState, useCallback } from "react";
-import { ParticipantForm } from "@/components/ParticipantForm";
-import { TypingTest } from "@/components/TypingTest";
-import { Leaderboard } from "@/components/Leaderboard";
+import { ParticipantForm } from "@/components/participant-form";
+import { TypingTest } from "@/components/typing-test";
+import { Leaderboard, type Participant } from "@/components/leaderboard";
 import { Button } from "@/components/ui/button";
 import { Keyboard, Play, RotateCcw, Trophy, Plus, Share2 } from "lucide-react";
 import { toast } from "sonner";
 
-export interface Participant {
-  id: string;
-  name: string;
-  time_seconds: number | null;
-  errors: number;
-  wpm: number;
-  completed: boolean;
-  created_at: string;
-}
-
-export default function Index() {
+export default function Home() {
   const [competitionStarted, setCompetitionStarted] = useState(false);
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [currentPlayer, setCurrentPlayer] = useState<string | null>(null);
@@ -151,7 +143,7 @@ export default function Index() {
             </p>
             <p className="text-2xl font-bold text-amber-500">{winner.name}</p>
             <p className="text-muted-foreground text-sm">
-              {winner.time_seconds?.toFixed(1)}s · {winner.wpm} WPM ·{" "}
+              {winner.time_seconds?.toFixed(1)}s - {winner.wpm} WPM -{" "}
               {winner.errors} errores
             </p>
           </div>

@@ -1,11 +1,22 @@
-import { Trophy, Medal, Clock, AlertCircle, Gauge } from "lucide-react";
-import type { Participant } from "@/pages/Index";
+"use client";
 
-interface Props {
+import { Trophy, Medal, Clock, AlertCircle, Gauge } from "lucide-react";
+
+export interface Participant {
+  id: string;
+  name: string;
+  time_seconds: number | null;
+  errors: number;
+  wpm: number;
+  completed: boolean;
+  created_at: string;
+}
+
+interface LeaderboardProps {
   participants: Participant[];
 }
 
-export function Leaderboard({ participants }: Props) {
+export function Leaderboard({ participants }: LeaderboardProps) {
   const completed = participants
     .filter((p) => p.completed)
     .sort((a, b) => (a.time_seconds ?? Infinity) - (b.time_seconds ?? Infinity));

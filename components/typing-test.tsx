@@ -1,15 +1,17 @@
+"use client";
+
 import { useState, useEffect, useRef, useCallback } from "react";
 import { getRandomText } from "@/lib/texts";
 import { Button } from "@/components/ui/button";
-import { RotateCcw, Play } from "lucide-react";
+import { Play } from "lucide-react";
 
-interface Props {
+interface TypingTestProps {
   participantName: string;
   onComplete: (time: number, errors: number, wpm: number) => void;
   onCancel: () => void;
 }
 
-export function TypingTest({ participantName, onComplete, onCancel }: Props) {
+export function TypingTest({ participantName, onComplete, onCancel }: TypingTestProps) {
   const [targetText] = useState(() => getRandomText());
   const [typed, setTyped] = useState("");
   const [started, setStarted] = useState(false);
@@ -42,12 +44,8 @@ export function TypingTest({ participantName, onComplete, onCancel }: Props) {
 
   const handleStart = () => {
     setStarted(true);
-    setStartTime(Date.now());
-    timerRef.current = setInterval(() => {
-      setElapsed((Date.now() - Date.now()) / 1000);
-    }, 100);
-    // Fix: use a closure over the start time
     const now = Date.now();
+    setStartTime(now);
     timerRef.current = setInterval(() => {
       setElapsed((Date.now() - now) / 1000);
     }, 100);
@@ -63,7 +61,7 @@ export function TypingTest({ participantName, onComplete, onCancel }: Props) {
 
   const renderText = () => {
     return targetText.split("").map((char, i) => {
-      let className = "text-muted-foreground"; // not typed yet
+      let className = "text-muted-foreground";
       if (i < typed.length) {
         className = typed[i] === char ? "text-primary" : "text-destructive underline";
       }
@@ -114,7 +112,9 @@ export function TypingTest({ participantName, onComplete, onCancel }: Props) {
             <p className="text-xs text-muted-foreground">Tiempo</p>
           </div>
           <div className="text-center">
-            <p className={`text-2xl font-mono font-bold ${errors > 0 ? 'text-destructive' : 'text-primary'}`}>{errors}</p>
+            <p className={`text-2xl font-mono font-bold ${errors > 0 ? "text-destructive" : "text-primary"}`}>
+              {errors}
+            </p>
             <p className="text-xs text-muted-foreground">Errores</p>
           </div>
         </div>

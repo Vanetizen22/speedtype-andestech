@@ -11,8 +11,7 @@ Una aplicacion de competencia de escritura rapida desarrollada por AndesTech.
 
 ## Tecnologias
 
-- React 18
+- Next.js 15
+- React 19
 - TypeScript
-- Vite
 - Tailwind CSS
-- shadcn/ui
