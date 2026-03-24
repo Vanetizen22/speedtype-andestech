@@ -155,8 +155,32 @@ export default function Home() {
 
         {/* Typing test active */}
         {activeParticipant ? (
-          <div className="fixed inset-0 bg-background z-50 flex items-center justify-center p-4 overflow-hidden">
-            <div className="w-full h-full max-w-4xl flex items-center justify-center overflow-hidden">
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              width: "100vw",
+              height: "100vh",
+              zIndex: 50,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "hsl(var(--background))",
+              padding: "2rem",
+              boxSizing: "border-box",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              style={{
+                width: "100%",
+                maxWidth: "800px",
+                boxSizing: "border-box",
+              }}
+            >
               <TypingTest
                 participantName={activeParticipant.name}
                 text={activeParticipant.text}
