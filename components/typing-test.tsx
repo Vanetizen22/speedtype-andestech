@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { Play } from "lucide-react";
+import { Play, Trophy, Clock, AlertCircle, Zap, ArrowRight } from "lucide-react";
 
 interface TypingTestProps {
   participantName: string;
@@ -11,12 +11,19 @@ interface TypingTestProps {
   onCancel: () => void;
 }
 
+interface Results {
+  time: number;
+  errors: number;
+  wpm: number;
+}
+
 export function TypingTest({ participantName, text, onComplete, onCancel }: TypingTestProps) {
   const targetText = text;
   const [typed, setTyped] = useState("");
   const [started, setStarted] = useState(false);
   const [startTime, setStartTime] = useState<number | null>(null);
   const [elapsed, setElapsed] = useState(0);
+  const [results, setResults] = useState<Results | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -31,16 +38,22 @@ export function TypingTest({ participantName, text, onComplete, onCancel }: Typi
   }, []);
 
   useEffect(() => {
-    if (isComplete && startTime) {
+    if (isComplete && startTime && !results) {
       stopTimer();
       const totalTime = (Date.now() - startTime) / 1000;
       const words = targetText.split(" ").length;
       const wpm = Math.round((words / totalTime) * 60);
-      onComplete(totalTime, errors, wpm);
+      setResults({ time: totalTime, errors, wpm });
     }
-  }, [isComplete, startTime, errors, targetText, onComplete, stopTimer]);
+  }, [isComplete, startTime, errors, targetText, results, stopTimer]);
 
   useEffect(() => () => stopTimer(), [stopTimer]);
+
+  const handleBackToLeaderboard = () => {
+    if (results) {
+      onComplete(results.time, results.errors, results.wpm);
+    }
+  };
 
   const handleStart = () => {
     setStarted(true);
@@ -75,6 +88,79 @@ export function TypingTest({ participantName, text, onComplete, onCancel }: Typi
       );
     });
   };
+
+  // Pantalla de resultados
+  if (results) {
+    return (
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "2rem",
+          backgroundColor: "hsl(var(--background))",
+          zIndex: 50,
+          boxSizing: "border-box",
+          padding: "2rem",
+        }}
+      >
+        <div style={{ textAlign: "center" }}>
+          <Trophy className="w-16 h-16 text-amber-500 mx-auto mb-4" />
+          <h2 className="text-3xl font-bold text-foreground mb-2">Intento Completado</h2>
+          <p className="text-xl text-amber-500 font-semibold">{participantName}</p>
+        </div>
+
+        <div 
+          className="bg-card border border-border rounded-2xl p-8"
+          style={{ width: "100%", maxWidth: "400px" }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              <div className="bg-primary/10 p-3 rounded-xl">
+                <Clock className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <p className="text-muted-foreground text-sm">Tiempo Total</p>
+                <p className="text-2xl font-mono font-bold text-foreground">{results.time.toFixed(2)}s</p>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              <div className="bg-primary/10 p-3 rounded-xl">
+                <Zap className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <p className="text-muted-foreground text-sm">Palabras por Minuto</p>
+                <p className="text-2xl font-mono font-bold text-foreground">{results.wpm} WPM</p>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              <div className={`p-3 rounded-xl ${results.errors > 0 ? "bg-destructive/10" : "bg-green-500/10"}`}>
+                <AlertCircle className={`w-6 h-6 ${results.errors > 0 ? "text-destructive" : "text-green-500"}`} />
+              </div>
+              <div>
+                <p className="text-muted-foreground text-sm">Errores</p>
+                <p className={`text-2xl font-mono font-bold ${results.errors > 0 ? "text-destructive" : "text-green-500"}`}>
+                  {results.errors}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <Button onClick={handleBackToLeaderboard} size="lg" className="gap-2 text-lg px-8 mt-4">
+          Ver Clasificacion General
+          <ArrowRight className="w-5 h-5" />
+        </Button>
+      </div>
+    );
+  }
 
   // Pantalla previa al inicio
   if (!started) {
