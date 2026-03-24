@@ -100,7 +100,7 @@ export function TypingTest({ participantName, text, onComplete, onCancel }: Typi
   }
 
   return (
-    <div className="space-y-6 w-full">
+    <div className="space-y-6 w-full overflow-hidden">
       <div className="flex items-center justify-between">
         <div className="space-y-1">
           <p className="text-muted-foreground text-xs uppercase tracking-widest">Escribiendo</p>
@@ -120,7 +120,7 @@ export function TypingTest({ participantName, text, onComplete, onCancel }: Typi
         </div>
       </div>
 
-      <div className="bg-muted rounded-lg p-6 font-mono text-lg leading-relaxed tracking-wide select-none">
+      <div className="bg-muted rounded-lg p-6 font-mono text-base leading-relaxed tracking-tight select-none overflow-hidden break-words whitespace-pre-wrap">
         {renderText()}
       </div>
 
