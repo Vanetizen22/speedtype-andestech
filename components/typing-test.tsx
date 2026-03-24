@@ -76,14 +76,32 @@ export function TypingTest({ participantName, text, onComplete, onCancel }: Typi
     });
   };
 
+  // Pantalla previa al inicio
   if (!started) {
     return (
-      <div className="flex flex-col items-center justify-center gap-8 py-12">
-        <div className="text-center space-y-2">
-          <p className="text-muted-foreground text-sm uppercase tracking-widest">Turno de</p>
-          <h2 className="text-3xl font-bold text-amber-500">{participantName}</h2>
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "2rem",
+          backgroundColor: "hsl(var(--background))",
+          zIndex: 50,
+          boxSizing: "border-box",
+        }}
+      >
+        <div style={{ textAlign: "center" }}>
+          <p className="text-muted-foreground text-sm uppercase tracking-widest mb-1">
+            Turno de
+          </p>
+          <h2 className="text-4xl font-bold text-amber-500">{participantName}</h2>
         </div>
-        <p className="text-muted-foreground text-center max-w-md">
+        <p className="text-muted-foreground text-center" style={{ maxWidth: "420px" }}>
           Cuando estes listo, presiona el boton. El cronometro comenzara inmediatamente.
         </p>
         <div className="flex gap-3">
@@ -99,43 +117,79 @@ export function TypingTest({ participantName, text, onComplete, onCancel }: Typi
     );
   }
 
+  // Pantalla de escritura activa
   return (
-    <div className="space-y-6 w-full overflow-hidden">
-      <div className="flex items-center justify-between">
-        <div className="space-y-1">
-          <p className="text-muted-foreground text-xs uppercase tracking-widest">Escribiendo</p>
-          <p className="text-amber-500 font-semibold">{participantName}</p>
-        </div>
-        <div className="flex gap-6 items-center">
-          <div className="text-center">
-            <p className="text-2xl font-mono font-bold text-primary">{elapsed.toFixed(1)}s</p>
-            <p className="text-xs text-muted-foreground">Tiempo</p>
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "hsl(var(--background))",
+        zIndex: 50,
+        boxSizing: "border-box",
+        padding: "2rem",
+      }}
+    >
+      {/* Contenedor central acotado */}
+      <div style={{ width: "100%", maxWidth: "760px", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+
+        {/* Estadísticas */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div>
+            <p className="text-muted-foreground text-xs uppercase tracking-widest">Escribiendo</p>
+            <p className="text-amber-500 font-semibold text-lg">{participantName}</p>
           </div>
-          <div className="text-center">
-            <p className={`text-2xl font-mono font-bold ${errors > 0 ? "text-destructive" : "text-primary"}`}>
-              {errors}
-            </p>
-            <p className="text-xs text-muted-foreground">Errores</p>
+          <div style={{ display: "flex", gap: "2rem" }}>
+            <div style={{ textAlign: "center" }}>
+              <p className="text-3xl font-mono font-bold text-primary">{elapsed.toFixed(1)}s</p>
+              <p className="text-xs text-muted-foreground">Tiempo</p>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <p className={`text-3xl font-mono font-bold ${errors > 0 ? "text-destructive" : "text-primary"}`}>
+                {errors}
+              </p>
+              <p className="text-xs text-muted-foreground">Errores</p>
+            </div>
           </div>
         </div>
+
+        {/* Caja de texto */}
+        <div
+          className="bg-muted rounded-xl select-none"
+          style={{
+            padding: "1.75rem",
+            fontFamily: "monospace",
+            fontSize: "1rem",
+            lineHeight: "1.9",
+            wordBreak: "break-word",
+            overflowWrap: "break-word",
+            whiteSpace: "pre-wrap",
+            width: "100%",
+            boxSizing: "border-box",
+          }}
+        >
+          {renderText()}
+        </div>
+
+        {/* Input invisible */}
+        <input
+          ref={inputRef}
+          value={typed}
+          onChange={handleInput}
+          style={{ position: "absolute", opacity: 0, pointerEvents: "auto", width: "1px", height: "1px" }}
+          autoFocus
+          onBlur={() => inputRef.current?.focus()}
+        />
+
+        <p className="text-center text-muted-foreground text-sm">
+          Escribe el texto exactamente como aparece arriba
+        </p>
       </div>
-
-      <div className="bg-muted rounded-lg p-6 font-mono text-base leading-relaxed tracking-tight select-none overflow-hidden break-words whitespace-pre-wrap">
-        {renderText()}
-      </div>
-
-      <input
-        ref={inputRef}
-        value={typed}
-        onChange={handleInput}
-        className="opacity-0 absolute pointer-events-auto w-full h-12"
-        autoFocus
-        onBlur={() => inputRef.current?.focus()}
-      />
-
-      <p className="text-center text-muted-foreground text-sm">
-        Escribe el texto exactamente como aparece arriba
-      </p>
     </div>
   );
 }

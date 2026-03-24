@@ -153,42 +153,16 @@ export default function Home() {
           </div>
         )}
 
-        {/* Typing test active */}
+        {/* Typing test active — el componente maneja su propio fullscreen */}
         {activeParticipant ? (
-          <div
-            style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              width: "100vw",
-              height: "100vh",
-              zIndex: 50,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "hsl(var(--background))",
-              padding: "2rem",
-              boxSizing: "border-box",
-              overflow: "hidden",
-            }}
-          >
-            <div
-              style={{
-                width: "100%",
-                maxWidth: "800px",
-                boxSizing: "border-box",
-              }}
-            >
-              <TypingTest
-                participantName={activeParticipant.name}
-                text={activeParticipant.text}
-                onComplete={handleComplete}
-                onCancel={() => setCurrentPlayer(null)}
-              />
-            </div>
-          </div>
+          <>
+            <TypingTest
+              participantName={activeParticipant.name}
+              text={activeParticipant.text}
+              onComplete={handleComplete}
+              onCancel={() => setCurrentPlayer(null)}
+            />
+          </>
         ) : (
           <>
             {/* Registration */}
