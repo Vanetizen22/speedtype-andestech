@@ -1,53 +1,63 @@
 export const TYPING_TEXTS = [
-  "La velocidad de escritura requiere practica constante y dedicacion diaria. El secreto esta en encontrar el ritmo perfecto entre la mente y las manos para escribir con fluidez.",
+  "La inteligencia artificial esta transformando la manera en que los desarrolladores escriben codigo. Los modelos de lenguaje sugieren funciones completas y detectan errores en tiempo real.",
 
-  "Cada tecla presionada con precision te acerca mas a la victoria en la competencia. La exactitud siempre debe ir primero que la rapidez para obtener el mejor resultado posible.",
+  "Blockchain es una tecnologia de registro distribuido que garantiza la inmutabilidad de los datos. Cada bloque contiene un hash del anterior formando una cadena verificable y segura.",
 
-  "El arte de escribir rapido combina concentracion profunda y buena postura corporal. Los mejores mecanografos desarrollan una memoria muscular completamente automatica con el tiempo.",
+  "El diseno de interfaces modernas prioriza la experiencia del usuario sobre la estetica visual. Un buen diseñador equilibra la funcionalidad con la belleza para crear productos memorables.",
 
-  "Programar exige escritura rapida y muy precisa en todo momento. Dominar el teclado permite mantener el flujo de pensamiento creativo sin interrupciones molestas durante el trabajo.",
+  "Los contratos inteligentes son programas que se ejecutan automaticamente sobre la blockchain. Eliminan intermediarios y permiten transacciones confiables sin necesidad de terceras partes.",
 
-  "Los grandes escritores no nacieron dominando la mecanografia desde el inicio. Todos practicaron incansablemente durante anos hasta desarrollar esta valiosa habilidad de manera natural.",
+  "El aprendizaje automatico permite a las maquinas identificar patrones en grandes volumenes de datos. Esta capacidad esta revolucionando sectores como la salud, finanzas y el comercio.",
 
-  "La tecnologia moderna exige dominio real del teclado para ser productivo. Mejorar tu velocidad de escritura aumenta significativamente tu rendimiento y productividad personal cada dia.",
+  "Un desarrollador full stack domina tanto el frontend como el backend de una aplicacion web. Esta versatilidad permite construir productos completos de manera independiente y eficiente.",
 
-  "Respirar profundamente antes de escribir ayuda a mantener la calma necesaria. Los competidores profesionales usan tecnicas de respiracion y visualizacion para mejorar su concentracion.",
+  "Las redes neuronales artificiales se inspiran en el funcionamiento del cerebro humano para aprender. Procesan capas de informacion para reconocer imagenes, texto y voz con alta precision.",
 
-  "La precision es siempre mas importante que la velocidad pura de escritura. Mantener un alto porcentaje de precision es clave antes de intentar aumentar la velocidad gradualmente.",
+  "Web3 propone un internet descentralizado donde los usuarios controlan sus propios datos digitales. Esta vision desafia el modelo actual dominado por grandes plataformas tecnologicas centralizadas.",
 
-  "El teclado QWERTY tiene mas de ciento cincuenta anos de historia en el mundo. Su diseno clasico ha perdurado gracias a su familiaridad universal entre millones de usuarios.",
+  "El diseño responsivo adapta la interfaz de una aplicacion a cualquier dispositivo o tamano de pantalla. Esta tecnica es esencial para ofrecer una experiencia consistente en el mundo movil.",
 
-  "Los mejores mecanografos del mundo escriben sobre doscientas palabras por minuto. Estos increibles atletas del teclado entrenan durante muchas horas rigurosas cada dia de la semana.",
+  "Los microservicios dividen una aplicacion grande en servicios pequeños e independientes entre si. Este enfoque facilita el escalado, el mantenimiento y el despliegue continuo en produccion.",
 
-  "La memoria muscular es fundamental para dominar la mecanografia de manera experta. Cuando los dedos aprenden sin buscar teclas visualmente la velocidad aumenta de forma exponencial.",
+  "La criptografia es el pilar fundamental que hace posible la seguridad en la blockchain moderna. Sin algoritmos como SHA-256 no existirian las criptomonedas ni los contratos inteligentes.",
 
-  "Los teclados mecanicos mejoran significativamente la precision al escribir con fuerza. La retroalimentacion tactil ayuda a saber exactamente cuando cada tecla fue correctamente activada.",
+  "El procesamiento del lenguaje natural permite a las maquinas entender y generar texto humano. Esta rama de la inteligencia artificial impulsa a los asistentes virtuales y chatbots modernos.",
 
-  "La posicion correcta de los dedos sobre el teclado previene la fatiga acumulada. Los indices descansan sobre F y J para mantener siempre la orientacion correcta sin mirar.",
+  "Los sistemas de diseno unifican los componentes visuales de un producto digital en un solo lugar. Garantizan coherencia visual y agilizan el trabajo conjunto entre diseñadores y desarrolladores.",
 
-  "Escribir rapido es una habilidad completamente aprendida y no un talento innato especial. Cualquier persona suficientemente dedicada puede mejorar significativamente con practica constante.",
+  "DevOps integra el desarrollo de software con las operaciones de infraestructura de manera continua. Esto permite lanzar actualizaciones frecuentes con mayor calidad y menor riesgo operativo.",
 
-  "La concentracion total es lo que separa a los mecanografos ordinarios de los extraordinarios. Entrar en estado de flujo requiere practica deliberada, paciencia y mucha dedicacion personal.",
+  "Los tokens no fungibles o NFT representan propiedad digital unica sobre la cadena de bloques. Han abierto nuevos modelos de negocio para artistas y creadores de contenido en internet.",
 
-  "Las competencias de mecanografia ponen a prueba los limites de velocidad y precision humana. Participar en ellas es una experiencia emocionante que motiva a seguir mejorando cada vez mas.",
+  "La computacion en la nube permite acceder a recursos de procesamiento y almacenamiento de forma remota. Empresas de todos los tamanos se benefician de su flexibilidad y escalabilidad.",
 
-  "Escribir sin mirar el teclado es una tecnica que todo profesional debe dominar completamente. Esta habilidad libera la vista para enfocarse en la pantalla y mejorar la calidad del trabajo.",
+  "Los algoritmos de recomendacion analizan el comportamiento del usuario para predecir sus preferencias. Esta tecnologia esta presente en plataformas de streaming, comercio y redes sociales.",
 
-  "La practica diaria de quince minutos es suficiente para mejorar la velocidad de escritura. La constancia a lo largo del tiempo produce resultados sorprendentes y completamente medibles.",
+  "El codigo abierto permite que cualquier desarrollador estudie, modifique y distribuya software libremente. Este modelo colaborativo ha producido algunas de las herramientas mas importantes de internet.",
 
-  "Un mecanografo experto puede escribir un documento completo sin cometer errores graves. Esta combinacion de velocidad y precision es el objetivo final de cualquier practicante serio.",
+  "Las aplicaciones descentralizadas o dApps funcionan sobre redes blockchain sin un servidor central. Ofrecen mayor transparencia y resistencia a la censura comparadas con las aplicaciones tradicionales.",
 
-  "La competencia amistosa entre colegas es una excelente manera de mejorar la mecanografia. Comparar resultados motiva a cada participante a superar su propio marcador anterior.",
+  "La accesibilidad web garantiza que las personas con discapacidad puedan usar cualquier sitio digital. Implementar buenas practicas de accesibilidad tambien mejora el SEO y la usabilidad general.",
 
-  "Dominar las teclas de funcion y los atajos de teclado aumenta mucho la productividad diaria. Cada atajo aprendido ahorra segundos valiosos que se acumulan en horas al cabo del mes.",
+  "Los modelos de lenguaje grande son entrenados con millones de textos para generar respuestas coherentes. Su capacidad de razonamiento y generacion ha sorprendido a la comunidad cientifica mundial.",
 
-  "El ritmo constante al escribir produce mejores resultados que las rafagas de velocidad. Mantener una cadencia uniforme reduce los errores y mejora el tiempo total del intento.",
+  "La seguridad informatica protege los sistemas digitales frente a accesos no autorizados y ataques maliciosos. En la era de los datos, esta disciplina se vuelve cada vez mas critica y valorada.",
 
-  "Las manos relajadas sobre el teclado permiten escribir mas rapido y con menos fatiga muscular. La tension en los dedos y muniercas es el principal enemigo de la velocidad sostenida.",
+  "El prototipado rapido en diseno permite validar ideas con usuarios reales antes de construir el producto. Herramientas como Figma han democratizado este proceso para equipos de cualquier tamano.",
 
-  "Cada participante en esta competencia da lo mejor de si mismo frente al teclado. El esfuerzo y la concentracion de cada uno merecen reconocimiento sin importar el resultado final.",
+  "Las API REST permiten que distintas aplicaciones se comuniquen entre si de manera estandarizada. Son el puente que conecta frontends, backends y servicios externos en el ecosistema digital.",
 
-  "La mecanografia es una habilidad que combina mente agil y dedos bien entrenados. Quienes la dominan tienen una ventaja clara en cualquier entorno profesional del mundo moderno."
+  "La tokenizacion de activos permite representar bienes del mundo real dentro de la blockchain global. Desde inmuebles hasta obras de arte pueden fraccionarse y transarse digitalmente con seguridad.",
+
+  "El edge computing procesa datos cerca de donde se generan en lugar de enviarlos a la nube central. Esta estrategia reduce la latencia y mejora el rendimiento de aplicaciones en tiempo real.",
+
+  "Los sistemas multiagente en inteligencia artificial coordinan multiples agentes autonomos para resolver problemas. Esta tecnologia es clave en robotica, logistica y simulaciones complejas de entornos.",
+
+  "El diseno centrado en el usuario parte de investigar necesidades reales antes de crear soluciones digitales. Entender al usuario evita construir productos que nadie quiere usar en la vida real.",
+
+  "La infraestructura como codigo permite gestionar servidores y redes mediante archivos de configuracion versionados. Herramientas como Terraform hacen que los entornos sean reproducibles y auditables.",
+
+  "Los grafos de conocimiento organizan informacion en forma de nodos y relaciones semanticas entre conceptos. Son la base de motores de busqueda inteligentes y sistemas de recomendacion avanzados."
 ];
 
 export function getTextByIndex(index: number): string {
