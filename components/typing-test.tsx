@@ -28,7 +28,7 @@ export function TypingTest({ participantName, text, onComplete, onCancel }: Typi
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const errors = typed.split("").filter((ch, i) => ch !== targetText[i]).length;
-  const isComplete = typed.length > 0 && typed.length === targetText.length;
+  const isComplete = typed.length === targetText.length;
 
   const stopTimer = useCallback(() => {
     if (timerRef.current) {
@@ -41,13 +41,11 @@ export function TypingTest({ participantName, text, onComplete, onCancel }: Typi
     if (isComplete && startTime && !results) {
       stopTimer();
       const totalTime = (Date.now() - startTime) / 1000;
-      const words = targetText.trim().split(/\s+/).length;
+      const words = targetText.split(" ").length;
       const wpm = Math.round((words / totalTime) * 60);
-      // Calcular errores directamente sobre typed actual
-      const finalErrors = typed.split("").filter((ch, i) => ch !== targetText[i]).length;
-      setResults({ time: totalTime, errors: finalErrors, wpm });
+      setResults({ time: totalTime, errors, wpm });
     }
-  }, [isComplete, startTime, typed, targetText, results, stopTimer]);
+  }, [isComplete, startTime, errors, targetText, results, stopTimer]);
 
   useEffect(() => () => stopTimer(), [stopTimer]);
 
