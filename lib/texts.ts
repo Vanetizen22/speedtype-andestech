@@ -1,63 +1,63 @@
 export const TYPING_TEXTS = [
-  "La inteligencia artificial esta transformando la manera en que los desarrolladores escriben codigo. Los modelos de lenguaje sugieren funciones completas y detectan errores en tiempo real.",
+  "La inteligencia artificial transforma como escriben codigo los desarrolladores modernos. Los modelos de lenguaje sugieren funciones y detectan errores en tiempo real.",
 
-  "Blockchain es una tecnologia de registro distribuido que garantiza la inmutabilidad de los datos. Cada bloque contiene un hash del anterior formando una cadena verificable y segura.",
+  "Blockchain es tecnologia de registro distribuido que garantiza la inmutabilidad de datos. Cada bloque contiene un hash formando una cadena verificable y segura.",
 
-  "El diseno de interfaces modernas prioriza la experiencia del usuario sobre la estetica visual. Un buen diseñador equilibra la funcionalidad con la belleza para crear productos memorables.",
+  "El diseno moderno prioriza la experiencia del usuario sobre la estetica visual pura. Un diseñador equilibra funcionalidad con belleza para crear productos memorables.",
 
-  "Los contratos inteligentes son programas que se ejecutan automaticamente sobre la blockchain. Eliminan intermediarios y permiten transacciones confiables sin necesidad de terceras partes.",
+  "Los contratos inteligentes ejecutan programas automaticamente sobre la blockchain eliminando intermediarios. Permiten transacciones confiables sin necesidad de terceras partes involucradas.",
 
-  "El aprendizaje automatico permite a las maquinas identificar patrones en grandes volumenes de datos. Esta capacidad esta revolucionando sectores como la salud, finanzas y el comercio.",
+  "El aprendizaje automatico permite identificar patrones en grandes volumenes de datos. Esta capacidad revoluciona sectores como salud, finanzas y comercio actual.",
 
-  "Un desarrollador full stack domina tanto el frontend como el backend de una aplicacion web. Esta versatilidad permite construir productos completos de manera independiente y eficiente.",
+  "Un desarrollador full stack domina frontend y backend de aplicaciones web modernas. Esta versatilidad permite construir productos completos de manera independiente.",
 
-  "Las redes neuronales artificiales se inspiran en el funcionamiento del cerebro humano para aprender. Procesan capas de informacion para reconocer imagenes, texto y voz con alta precision.",
+  "Las redes neuronales se inspiran en el cerebro humano para aprender. Reconocen imagenes, texto y voz con precision utilizando capas de informacion.",
 
-  "Web3 propone un internet descentralizado donde los usuarios controlan sus propios datos digitales. Esta vision desafia el modelo actual dominado por grandes plataformas tecnologicas centralizadas.",
+  "Web3 propone internet descentralizado donde usuarios controlan sus propios datos digitales. Esta vision desafia plataformas tecnologicas centralizadas que dominan actualmente.",
 
-  "El diseño responsivo adapta la interfaz de una aplicacion a cualquier dispositivo o tamano de pantalla. Esta tecnica es esencial para ofrecer una experiencia consistente en el mundo movil.",
+  "El diseño responsivo adapta interfaces a cualquier dispositivo o tamano de pantalla. Esta tecnica es esencial para experiencia consistente en mundo movil.",
 
-  "Los microservicios dividen una aplicacion grande en servicios pequeños e independientes entre si. Este enfoque facilita el escalado, el mantenimiento y el despliegue continuo en produccion.",
+  "Los microservicios dividen aplicaciones grandes en servicios pequeños e independientes entre si. Este enfoque facilita escalado, mantenimiento y despliegue continuo en produccion.",
 
-  "La criptografia es el pilar fundamental que hace posible la seguridad en la blockchain moderna. Sin algoritmos como SHA-256 no existirian las criptomonedas ni los contratos inteligentes.",
+  "La criptografia es pilar fundamental para seguridad en blockchain moderna actualizada. Sin algoritmos como SHA-256 no existirian criptomonedas ni contratos inteligentes.",
 
-  "El procesamiento del lenguaje natural permite a las maquinas entender y generar texto humano. Esta rama de la inteligencia artificial impulsa a los asistentes virtuales y chatbots modernos.",
+  "El procesamiento del lenguaje natural permite maquinas entender y generar texto. Esta rama de IA impulsa asistentes virtuales y chatbots modernos.",
 
-  "Los sistemas de diseno unifican los componentes visuales de un producto digital en un solo lugar. Garantizan coherencia visual y agilizan el trabajo conjunto entre diseñadores y desarrolladores.",
+  "Los sistemas de diseno unifican componentes visuales en un producto digital. Garantizan coherencia visual y agilizan trabajo entre diseñadores y desarrolladores.",
 
-  "DevOps integra el desarrollo de software con las operaciones de infraestructura de manera continua. Esto permite lanzar actualizaciones frecuentes con mayor calidad y menor riesgo operativo.",
+  "DevOps integra desarrollo software con operaciones infraestructura de manera continua. Permite lanzar actualizaciones frecuentes con calidad y menor riesgo operativo.",
 
-  "Los tokens no fungibles o NFT representan propiedad digital unica sobre la cadena de bloques. Han abierto nuevos modelos de negocio para artistas y creadores de contenido en internet.",
+  "Los tokens NFT representan propiedad digital unica sobre cadena de bloques. Han abierto modelos negocio para artistas y creadores de contenido.",
 
-  "La computacion en la nube permite acceder a recursos de procesamiento y almacenamiento de forma remota. Empresas de todos los tamanos se benefician de su flexibilidad y escalabilidad.",
+  "La computacion nube permite acceder recursos procesamiento almacenamiento forma remota. Empresas todos tamanos se benefician de flexibilidad escalabilidad completa.",
 
-  "Los algoritmos de recomendacion analizan el comportamiento del usuario para predecir sus preferencias. Esta tecnologia esta presente en plataformas de streaming, comercio y redes sociales.",
+  "Los algoritmos recomendacion analizan comportamiento usuario predecir sus preferencias. Tecnologia presente plataformas streaming, comercio y redes sociales.",
 
-  "El codigo abierto permite que cualquier desarrollador estudie, modifique y distribuya software libremente. Este modelo colaborativo ha producido algunas de las herramientas mas importantes de internet.",
+  "El codigo abierto permite desarrolladores estudiar, modificar distribuir software libremente. Modelo colaborativo produjo herramientas mas importantes internet actual.",
 
-  "Las aplicaciones descentralizadas o dApps funcionan sobre redes blockchain sin un servidor central. Ofrecen mayor transparencia y resistencia a la censura comparadas con las aplicaciones tradicionales.",
+  "Las dApps funcionan sobre redes blockchain sin servidor central involucrado. Ofrecen transparencia resistencia censura comparadas aplicaciones tradicionales.",
 
-  "La accesibilidad web garantiza que las personas con discapacidad puedan usar cualquier sitio digital. Implementar buenas practicas de accesibilidad tambien mejora el SEO y la usabilidad general.",
+  "La accesibilidad web garantiza personas discapacidad usen cualquier sitio digital. Buenas practicas mejoran SEO usabilidad general del producto.",
 
-  "Los modelos de lenguaje grande son entrenados con millones de textos para generar respuestas coherentes. Su capacidad de razonamiento y generacion ha sorprendido a la comunidad cientifica mundial.",
+  "Los modelos lenguaje grande entrenan millones textos generar respuestas coherentes. Capacidad razonamiento generacion sorprendio comunidad cientifica mundial.",
 
-  "La seguridad informatica protege los sistemas digitales frente a accesos no autorizados y ataques maliciosos. En la era de los datos, esta disciplina se vuelve cada vez mas critica y valorada.",
+  "La seguridad informatica protege sistemas digitales accesos no autorizados ataques. En era datos disciplina se vuelve critica valorada.",
 
-  "El prototipado rapido en diseno permite validar ideas con usuarios reales antes de construir el producto. Herramientas como Figma han democratizado este proceso para equipos de cualquier tamano.",
+  "El prototipado rapido diseno valida ideas usuarios reales antes construir. Herramientas como Figma democratizaron proceso para equipos cualquier tamano.",
 
-  "Las API REST permiten que distintas aplicaciones se comuniquen entre si de manera estandarizada. Son el puente que conecta frontends, backends y servicios externos en el ecosistema digital.",
+  "Las API REST permiten aplicaciones comunicarse entre si manera estandarizada. Conectan frontends, backends servicios externos ecosistema digital actual.",
 
-  "La tokenizacion de activos permite representar bienes del mundo real dentro de la blockchain global. Desde inmuebles hasta obras de arte pueden fraccionarse y transarse digitalmente con seguridad.",
+  "La tokenizacion activos representa bienes mundo real dentro blockchain global. Inmuebles obras arte fraccionarse transarse digitalmente con seguridad.",
 
-  "El edge computing procesa datos cerca de donde se generan en lugar de enviarlos a la nube central. Esta estrategia reduce la latencia y mejora el rendimiento de aplicaciones en tiempo real.",
+  "El edge computing procesa datos cerca donde generan en lugar nube. Reduce latencia mejora rendimiento aplicaciones tiempo real.",
 
-  "Los sistemas multiagente en inteligencia artificial coordinan multiples agentes autonomos para resolver problemas. Esta tecnologia es clave en robotica, logistica y simulaciones complejas de entornos.",
+  "Los sistemas multiagente coordinan multiples agentes autonomos resolver problemas complejos. Tecnologia clave robotica, logistica simulaciones complejas.",
 
-  "El diseno centrado en el usuario parte de investigar necesidades reales antes de crear soluciones digitales. Entender al usuario evita construir productos que nadie quiere usar en la vida real.",
+  "El diseno centrado usuario investigar necesidades reales crear soluciones digitales. Entender usuario evita construir productos nadie quiere usar.",
 
-  "La infraestructura como codigo permite gestionar servidores y redes mediante archivos de configuracion versionados. Herramientas como Terraform hacen que los entornos sean reproducibles y auditables.",
+  "La infraestructura codigo gestiona servidores redes mediante archivos configuracion versionados. Herramientas como Terraform hacen entornos reproducibles auditables.",
 
-  "Los grafos de conocimiento organizan informacion en forma de nodos y relaciones semanticas entre conceptos. Son la base de motores de busqueda inteligentes y sistemas de recomendacion avanzados."
+  "Los grafos conocimiento organizan informacion forma nodos relaciones semanticas. Base motores busqueda inteligentes sistemas recomendacion avanzados."
 ];
 
 export function getTextByIndex(index: number): string {
