@@ -1,61 +1,126 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { ParticipantForm } from "@/components/participant-form";
 import { TypingTest } from "@/components/typing-test";
 import { Leaderboard, type Participant } from "@/components/leaderboard";
 import { Button } from "@/components/ui/button";
-import { Keyboard, Play, RotateCcw, Trophy, Plus, Share2 } from "lucide-react";
+import { Keyboard, Play, RotateCcw, Trophy, Plus, Share2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { getTextByIndex } from "@/lib/texts";
 
+interface Competition {
+  id: string;
+  created_at: string;
+  name: string;
+}
+
 export default function Home() {
-  const [competitionStarted, setCompetitionStarted] = useState(false);
+  const [competition, setCompetition] = useState<Competition | null>(null);
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [currentPlayer, setCurrentPlayer] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const createCompetition = () => {
-    setCompetitionStarted(true);
-    toast.success("Competencia creada");
+  // Load existing competition on mount
+  useEffect(() => {
+    async function load() {
+      try {
+        const res = await fetch("/api/competition");
+        const data = await res.json();
+        if (data.competition) {
+          setCompetition(data.competition);
+          setParticipants(data.participants.map((p: Participant) => ({
+            ...p,
+            time_seconds: p.time_seconds ?? null,
+          })));
+        }
+      } catch {
+        toast.error("Error al cargar la competencia");
+      } finally {
+        setLoading(false);
+      }
+    }
+    load();
+  }, []);
+
+  const createCompetition = async () => {
+    try {
+      const res = await fetch("/api/competition", { method: "POST" });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      setCompetition(data.competition);
+      setParticipants([]);
+      toast.success("Competencia creada");
+    } catch {
+      toast.error("Error al crear la competencia");
+    }
   };
 
-  const addParticipant = (name: string) => {
-    setParticipants((prev) => {
-      const newParticipant: Participant = {
-        id: crypto.randomUUID(),
-        name,
-        text: getTextByIndex(prev.length),
-        time_seconds: null,
-        errors: 0,
-        wpm: 0,
-        completed: false,
-        created_at: new Date().toISOString(),
-      };
-      return [...prev, newParticipant];
-    });
-    toast.success(`${name} agregado a la competencia`);
+  const addParticipant = async (name: string) => {
+    if (!competition) return;
+    const text = getTextByIndex(participants.length);
+    try {
+      const res = await fetch("/api/participants", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ competition_id: competition.id, name, text }),
+      });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      setParticipants((prev) => [...prev, { ...data.participant, time_seconds: null }]);
+      toast.success(`${name} agregado a la competencia`);
+    } catch {
+      toast.error("Error al agregar participante");
+    }
   };
 
   const handleComplete = useCallback(
-    (time: number, errors: number, wpm: number) => {
+    async (time: number, errors: number, wpm: number) => {
       if (!currentPlayer) return;
-
-      setParticipants((prev) =>
-        prev.map((p) =>
-          p.id === currentPlayer
-            ? { ...p, time_seconds: time, errors, wpm, completed: true }
-            : p
-        )
-      );
-      setCurrentPlayer(null);
-      toast.success("Resultado guardado");
+      try {
+        const res = await fetch("/api/participants", {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: currentPlayer, time_seconds: time, errors, wpm }),
+        });
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+        setParticipants((prev) =>
+          prev.map((p) =>
+            p.id === currentPlayer
+              ? { ...p, time_seconds: time, errors, wpm, completed: true }
+              : p
+          )
+        );
+        toast.success("Resultado guardado");
+      } catch {
+        toast.error("Error al guardar resultado");
+      } finally {
+        setCurrentPlayer(null);
+      }
     },
     [currentPlayer]
   );
 
-  const resetAll = () => {
-    setParticipants([]);
-    toast.success("Competencia reiniciada");
+  const resetAll = async () => {
+    if (!competition) return;
+    try {
+      const res = await fetch("/api/competition", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ competitionId: competition.id }),
+      });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      setParticipants([]);
+      toast.success("Competencia reiniciada");
+    } catch {
+      toast.error("Error al reiniciar la competencia");
+    }
+  };
+
+  const newCompetition = async () => {
+    await createCompetition();
   };
 
   const shareLink = () => {
@@ -75,8 +140,17 @@ export default function Home() {
 
   const activeParticipant = participants.find((p) => p.id === currentPlayer);
 
+  // Loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-primary animate-spin" />
+      </div>
+    );
+  }
+
   // No competition yet - show start screen
-  if (!competitionStarted) {
+  if (!competition) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-6 px-4">
@@ -153,16 +227,14 @@ export default function Home() {
           </div>
         )}
 
-        {/* Typing test active — el componente maneja su propio fullscreen */}
+        {/* Typing test active */}
         {activeParticipant ? (
-          <>
-            <TypingTest
-              participantName={activeParticipant.name}
-              text={activeParticipant.text}
-              onComplete={handleComplete}
-              onCancel={() => setCurrentPlayer(null)}
-            />
-          </>
+          <TypingTest
+            participantName={activeParticipant.name}
+            text={activeParticipant.text}
+            onComplete={handleComplete}
+            onCancel={() => setCurrentPlayer(null)}
+          />
         ) : (
           <>
             {/* Registration */}
@@ -204,17 +276,28 @@ export default function Home() {
                 <h2 className="text-sm uppercase tracking-widest text-muted-foreground">
                   Clasificacion
                 </h2>
-                {participants.length > 0 && (
+                <div className="flex gap-2">
+                  {participants.length > 0 && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={resetAll}
+                      className="gap-1.5 text-muted-foreground hover:text-destructive"
+                    >
+                      <RotateCcw className="w-3.5 h-3.5" />
+                      Reiniciar
+                    </Button>
+                  )}
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={resetAll}
-                    className="gap-1.5 text-muted-foreground hover:text-destructive"
+                    onClick={newCompetition}
+                    className="gap-1.5 text-muted-foreground"
                   >
-                    <RotateCcw className="w-3.5 h-3.5" />
-                    Reiniciar
+                    <Plus className="w-3.5 h-3.5" />
+                    Nueva
                   </Button>
-                )}
+                </div>
               </div>
               <Leaderboard participants={participants} />
             </div>
