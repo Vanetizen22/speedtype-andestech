@@ -8,6 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.next
 dist
 dist-ssr
 *.local
@@ -28,3 +29,4 @@ bun.lockb
 *.njsproj
 *.sln
 *.sw?
+.env

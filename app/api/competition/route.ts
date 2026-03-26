@@ -1,64 +1,51 @@
-import { createClient } from "@/lib/supabase/server";
-import { NextResponse } from "next/server";
+import { eq } from 'drizzle-orm'
+import { NextResponse } from 'next/server'
+import { z } from 'zod'
+import { getAuthenticatedAdminSession } from '@/lib/auth'
+import { getActiveSession, getParticipantsBySessionId } from '@/lib/data'
+import { getDb } from '@/lib/db'
+import { results } from '@/lib/db/schema'
 
-// GET: fetch the latest active competition and its participants
+const resetCompetitionSchema = z.object({
+  competitionId: z.string().uuid(),
+})
+
 export async function GET() {
-  const supabase = await createClient();
+  try {
+    const session = await getActiveSession()
 
-  const { data: competition, error: compError } = await supabase
-    .from("competitions")
-    .select("*")
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .single();
+    if (!session) {
+      return NextResponse.json({ competition: null, participants: [] })
+    }
 
-  if (compError || !competition) {
-    return NextResponse.json({ competition: null, participants: [] });
+    const participants = await getParticipantsBySessionId(session.id)
+    return NextResponse.json({ competition: session, participants })
+  } catch (error) {
+    console.error(error)
+    return NextResponse.json({ error: 'No se pudo obtener la sesion activa' }, { status: 500 })
   }
-
-  const { data: participants, error: partError } = await supabase
-    .from("participants")
-    .select("*")
-    .eq("competition_id", competition.id)
-    .order("created_at", { ascending: true });
-
-  if (partError) {
-    return NextResponse.json({ competition, participants: [] });
-  }
-
-  return NextResponse.json({ competition, participants: participants ?? [] });
 }
 
-// POST: create a new competition
-export async function POST() {
-  const supabase = await createClient();
+export async function DELETE(request: Request) {
+  try {
+    const adminSession = await getAuthenticatedAdminSession()
 
-  const { data, error } = await supabase
-    .from("competitions")
-    .insert({ name: "Competencia SpeedType" })
-    .select()
-    .single();
+    if (!adminSession) {
+      return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+    }
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    const body = resetCompetitionSchema.parse(await request.json())
+    const db = getDb()
+
+    await db.delete(results).where(eq(results.sessionId, body.competitionId))
+
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: 'Datos invalidos' }, { status: 400 })
+    }
+
+    console.error(error)
+    return NextResponse.json({ error: 'No se pudo reiniciar la sesion' }, { status: 500 })
   }
-
-  return NextResponse.json({ competition: data });
-}
-
-// DELETE: reset competition (delete all participants, keep competition row)
-export async function DELETE(req: Request) {
-  const supabase = await createClient();
-  const { competitionId } = await req.json();
-
-  const { error } = await supabase
-    .from("participants")
-    .delete()
-    .eq("competition_id", competitionId);
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
-
-  return NextResponse.json({ success: true });
 }

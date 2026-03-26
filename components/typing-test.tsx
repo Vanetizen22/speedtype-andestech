@@ -28,7 +28,6 @@ export function TypingTest({ participantName, text, onComplete, onCancel }: Typi
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const errors = typed.split("").filter((ch, i) => ch !== targetText[i]).length;
-  const isComplete = typed.length === targetText.length;
 
   const stopTimer = useCallback(() => {
     if (timerRef.current) {
@@ -36,16 +35,6 @@ export function TypingTest({ participantName, text, onComplete, onCancel }: Typi
       timerRef.current = null;
     }
   }, []);
-
-  useEffect(() => {
-    if (isComplete && startTime && !results) {
-      stopTimer();
-      const totalTime = (Date.now() - startTime) / 1000;
-      const words = targetText.split(" ").length;
-      const wpm = Math.round((words / totalTime) * 60);
-      setResults({ time: totalTime, errors, wpm });
-    }
-  }, [isComplete, startTime, errors, targetText, results, stopTimer]);
 
   useEffect(() => () => stopTimer(), [stopTimer]);
 
@@ -68,6 +57,17 @@ export function TypingTest({ participantName, text, onComplete, onCancel }: Typi
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     if (val.length <= targetText.length) {
+      if (val.length === targetText.length && startTime && !results) {
+        stopTimer();
+        const totalTime = (Date.now() - startTime) / 1000;
+        const words = targetText.split(" ").length;
+        const currentErrors = val.split("").filter((ch, i) => ch !== targetText[i]).length;
+        const wpm = Math.round((words / totalTime) * 60);
+        setTyped(val);
+        setResults({ time: totalTime, errors: currentErrors, wpm });
+        return;
+      }
+
       setTyped(val);
     }
   };

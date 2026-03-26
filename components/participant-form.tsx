@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { UserPlus } from "lucide-react";
 
 interface ParticipantFormProps {
-  onAdd: (name: string) => void;
+  onAdd: (name: string) => void | Promise<void>;
   existingNames: string[];
 }
 

@@ -1,17 +1,9 @@
 "use client";
 
 import { Trophy, Medal, Clock, AlertCircle, Gauge } from "lucide-react";
+import type { ParticipantDraft } from '@/lib/types'
 
-export interface Participant {
-  id: string;
-  name: string;
-  text: string;
-  time_seconds: number | null;
-  errors: number;
-  wpm: number;
-  completed: boolean;
-  created_at: string;
-}
+export type Participant = ParticipantDraft;
 
 interface LeaderboardProps {
   participants: Participant[];
@@ -20,7 +12,7 @@ interface LeaderboardProps {
 export function Leaderboard({ participants }: LeaderboardProps) {
   const completed = participants
     .filter((p) => p.completed)
-    .sort((a, b) => (a.time_seconds ?? Infinity) - (b.time_seconds ?? Infinity));
+    .sort((a, b) => (a.timeSeconds ?? Infinity) - (b.timeSeconds ?? Infinity));
 
   const pending = participants.filter((p) => !p.completed);
 
@@ -70,7 +62,7 @@ export function Leaderboard({ participants }: LeaderboardProps) {
                 <div className="flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5 text-muted-foreground" />
                   <span className="font-mono font-bold">
-                    {p.time_seconds?.toFixed(1)}s
+                    {p.timeSeconds?.toFixed(1)}s
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5">
